@@ -28,12 +28,18 @@ $this->pageTitle=Yii::app()->name;
 
 	<?php echo $form->errorSummary($model); ?>
 
+
+
 	<div class="row">
-		<?php echo $form->labelEx($model,'levels_id'); ?>
-		<?php echo $form->textField($model,'levels_id'); ?>
+		<?php echo $form->labelEx($model,'levels'); ?>
+		<?php echo $form->dropDownList($model,'levels_id',CHtml::listData(Levels::model()->findAll(),'id','level')); ?>
 		<?php echo $form->error($model,'levels_id'); ?>
 	</div>
-
+	<div class="row">
+		<?php echo $form->labelEx($model,'prefix_id'); ?>
+		<?php echo $form->dropDownList($model,'prefix_id',CHtml::listData(Prefixs::model()->findAll(),'id','prefix')); ?>
+		<?php echo $form->error($model,'prefix_id'); ?>
+	</div>
 	<div class="row">
 		<?php echo $form->labelEx($model,'fisrt_name'); ?>
 		<?php echo $form->textField($model,'fisrt_name',array('size'=>60,'maxlength'=>100)); ?>
@@ -60,7 +66,7 @@ $this->pageTitle=Yii::app()->name;
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'prefix_id'); ?>
-		<?php echo $form->textField($model,'prefix_id'); ?>
+		<?php echo $form->dropDownList($model,'parent_prefix_id',CHtml::listData(Prefixs::model()->findAll(),'id','prefix')); ?>
 		<?php echo $form->error($model,'prefix_id'); ?>
 	</div>
 
@@ -88,11 +94,11 @@ $this->pageTitle=Yii::app()->name;
 		<?php echo $form->error($model,'parent_email'); ?>
 	</div>
 
-	<div class="row">
+	<!--<div class="row">
 		<?php echo $form->labelEx($model,'created'); ?>
 		<?php echo $form->textField($model,'created'); ?>
 		<?php echo $form->error($model,'created'); ?>
-	</div>
+	</div>-->
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'address'); ?>
@@ -113,7 +119,7 @@ $this->pageTitle=Yii::app()->name;
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'สมัครเรียน' : 'Save',array('class'=>'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

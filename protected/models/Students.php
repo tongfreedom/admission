@@ -43,15 +43,15 @@ class Students extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('levels_id, prefix_id, tambons_id', 'required'),
-			array('levels_id, prefix_id, tambons_id', 'numerical', 'integerOnly'=>true),
+			array('levels_id, prefix_id, parent_prefix_id, tambons_id', 'required'),
+			array('levels_id, prefix_id, parent_prefix_id, tambons_id', 'numerical', 'integerOnly'=>true),
 			array('fisrt_name, las_name, email, parent_first_name, parent_last_name, parent_email', 'length', 'max'=>100),
 			array('tel, parent_tel, status', 'length', 'max'=>45),
 			array('address', 'length', 'max'=>255),
 			array('created', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, levels_id, fisrt_name, las_name, email, tel, prefix_id, parent_first_name, parent_last_name, parent_tel, parent_email, created, address, tambons_id, status', 'safe', 'on'=>'search'),
+			array('id, levels_id, fisrt_name, las_name, email, tel, prefix_id, parent_prefix_id, parent_first_name, parent_last_name, parent_tel, parent_email, created, address, tambons_id, status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -76,12 +76,15 @@ class Students extends CActiveRecord
 	{
 		return array(
 			'id' => 'รหัสนักเรียน',
-			'levels_id' => 'รหัสระดับชั้น',
+			//'levels_id' => 'รหัสระดับชั้น',
+			'levels_id' => 'ระดับชั้น',
+			'prefix_id' => 'คำนำหน้า',
 			'fisrt_name' => 'ชื่อ',
 			'las_name' => 'นามสกุล',
 			'email' => 'อีเมล์',
 			'tel' => 'Tel',
-			'prefix_id' => 'รหัสคำนำหน้า',
+			//'prefix_id' => 'รหัสคำนำหน้า',
+			'parent_prefix_id' => 'คำนำหน้า',
 			'parent_first_name' => 'ชื่อผู้ปกครอง',
 			'parent_last_name' => 'นามสกุลผู้ปกครอง',
 			'parent_tel' => 'เบอร์โทรศัพท์ผู้ปกครอง',
@@ -113,11 +116,12 @@ class Students extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('levels_id',$this->levels_id);
+		$criteria->compare('prefix_id',$this->prefix_id);
 		$criteria->compare('fisrt_name',$this->fisrt_name,true);
 		$criteria->compare('las_name',$this->las_name,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('tel',$this->tel,true);
-		$criteria->compare('prefix_id',$this->prefix_id);
+		$criteria->compare('parent_prefix_id',$this->prefix_id);
 		$criteria->compare('parent_first_name',$this->parent_first_name,true);
 		$criteria->compare('parent_last_name',$this->parent_last_name,true);
 		$criteria->compare('parent_tel',$this->parent_tel,true);
